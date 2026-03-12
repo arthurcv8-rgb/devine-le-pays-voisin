@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Devine le Pays Voisin 🌍</title>
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="css.css">
+		<script src="jeu.js" defer></script>
+	</head>
+	
+	<body>
+		<!-- ======================== HOME ======================== -->
+		<div id="screen-home" class="screen fadein">
+			<div class="globe">🌍</div>
+			<h1>DEVINE LE PAYS VOISIN</h1>
+			<p class="tagline">Un pays s'affiche — trouve <strong>tous ses voisins frontaliers</strong> avant la fin du chrono !</p>
+
+			<div class="stats-row">
+				<div class="stat-box"><div class="ico">🗺️</div><div class="val">20</div><div class="lbl">Pays</div></div>
+				<div class="stat-box"><div class="ico">⏱️</div><div class="val">90s</div><div class="lbl">Par manche</div></div>
+				<div class="stat-box"><div class="ico">🏆</div><div class="val">5</div><div class="lbl">Manches</div></div>
+				<div class="stat-box"><div class="ico">💡</div><div class="val">∞</div><div class="lbl">Indices</div></div>
+			</div>
+
+			<div class="diff-label">Niveau de difficulté</div>
+			<div class="diff-row">
+				<button class="diff-btn active" data-diff="easy"  onclick="setDiff(this,'easy')">🟢 Facile</button>
+				<button class="diff-btn"        data-diff="medium" onclick="setDiff(this,'medium')">🟡 Normal</button>
+				<button class="diff-btn"        data-diff="hard"   onclick="setDiff(this,'hard')">🔴 Difficile</button>
+			</div>
+
+			<!-- Leaderboard preview -->
+			<div class="lb-preview">
+				<h3>🏆 CLASSEMENT</h3>
+				<div id="lb-home-list"></div>
+			</div>
+
+			<button class="btn-play" onclick="startGame()">▶ JOUER</button>
+		</div>
+
+		<!-- ======================== GAME ======================== -->
+		<div id="screen-game" class="screen hidden">
+			<div class="top-bar">
+				<span class="round-label" id="round-label">MANCHE 1/5</span>
+				<span class="score-label" id="score-label">⭐ 0 pts</span>
+			</div>
+
+			<div class="timer-wrap">
+				<div class="timer-bar-bg"><div class="timer-bar" id="timer-bar"></div></div>
+				<div class="timer-text" id="timer-text">90s</div>
+			</div>
+
+			<div class="country-card" id="country-card">
+				<div class="flag-display" id="flag-display">🌍</div>
+				<div class="country-name" id="country-name">FRANCE</div>
+				<div class="progress-text" id="progress-text">0/8 voisins trouvés</div>
+			</div>
+
+			<div class="input-row">
+				<input id="guess-input" type="text" placeholder="Tapez un pays voisin..."
+					autocomplete="off" spellcheck="false" />
+				<button class="btn-send" onclick="submitGuess()">→</button>
+			</div>
+
+			<button class="btn-hint" onclick="showHint()" id="hint-btn">💡 Indice — <span id="hint-text">cliquez pour un indice</span></button>
+
+			<div class="chips" id="chips-container"></div>
+		</div>
+
+		<!-- ======================== ROUND END ======================== -->
+		<div id="screen-round-end" class="screen hidden fadein">
+			<div class="re-flag" id="re-flag"></div>
+			<h2 id="re-country-name">FRANCE</h2>
+			<div class="re-sub" id="re-sub">Manche 1/5</div>
+
+			<div class="re-card">
+				<div class="re-section-title">✅ Trouvés</div>
+				<div class="re-chips" id="re-found"></div>
+			</div>
+			<div class="re-card" id="re-missed-card">
+				<div class="re-section-title">❌ Manqués</div>
+				<div class="re-chips" id="re-missed"></div>
+			</div>
+
+			<div class="re-score" id="re-score">Score total : 0 pts</div>
+			<button class="btn-next" id="btn-next" onclick="nextRound()">MANCHE SUIVANTE →</button>
+		</div>
+
+		<!-- ======================== RESULTS ======================== -->
+		<div id="screen-result" class="screen hidden fadein">
+			<div class="medal" id="result-medal">🥇</div>
+			<h2>PARTIE TERMINÉE</h2>
+			<div class="msg" id="result-msg">Géographe en chef !</div>
+			<div class="big-score" id="result-score">0</div>
+			<div class="big-score-sub">voisins trouvés en 5 manches</div>
+
+			<!-- Save to leaderboard -->
+			<div class="name-label">Entrez votre prénom pour le classement :</div>
+			<div class="name-row">
+				<input id="player-name" type="text" placeholder="Votre prénom..." maxlength="20" />
+				<button class="btn-save" onclick="saveScore()">💾 SAUVER</button>
+			</div>
+
+			<!-- Leaderboard -->
+			<div class="lb-full">
+				<h3>🏆 CLASSEMENT GLOBAL</h3>
+				<div id="lb-result-list"></div>
+			</div>
+
+			<button class="btn-replay" onclick="goHome()">🔄 REJOUER</button>
+		</div>
+
+	</body>
+</html>
