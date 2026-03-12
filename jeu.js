@@ -1,3 +1,7 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 /* ============================================================
    DATA
 ============================================================ */
@@ -6,7 +10,7 @@ const COUNTRIES = [
   { name:"Allemagne",     flag:"🇩🇪", neighbors:["France","Belgique","Luxembourg","Pays-Bas","Danemark","Pologne","Tchéquie","Autriche","Suisse"] },
   { name:"Espagne",       flag:"🇪🇸", neighbors:["France","Andorre","Portugal","Maroc"] },
   { name:"Italie",        flag:"🇮🇹", neighbors:["France","Monaco","Suisse","Autriche","Slovénie","Saint-Marin","Vatican"] },
-  { name:"Russie",        flag:"🇷🇺", neighbors:["Norvège","Finlande","Estonie","Lettonie","Biélorussie","Ukraine","Pologne","Lituanie","Russie","Géorgie","Azerbaïdjan","Kazakhstan","Chine","Mongolie","Corée du Nord"] },
+  { name:"Russie",        flag:"🇷🇺", neighbors:["Norvège","Finlande","Estonie","Lettonie","Biélorussie","Ukraine","Pologne","Lituanie","Géorgie","Azerbaïdjan","Kazakhstan","Chine","Mongolie","Corée du Nord"] },
   { name:"Brésil",        flag:"🇧🇷", neighbors:["Venezuela","Guyane","Suriname","Guyana","Colombie","Pérou","Bolivie","Paraguay","Argentine","Uruguay"] },
   { name:"Chine",         flag:"🇨🇳", neighbors:["Russie","Mongolie","Kazakhstan","Kirghizistan","Tadjikistan","Afghanistan","Pakistan","Inde","Népal","Bhoutan","Myanmar","Laos","Vietnam","Corée du Nord"] },
   { name:"Inde",          flag:"🇮🇳", neighbors:["Pakistan","Chine","Népal","Bhoutan","Bangladesh","Myanmar"] },
@@ -66,9 +70,7 @@ function show(id) {
 /* ============================================================
    FIREBASE SETUP
 ============================================================ */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCUAX4KHrzFjULBUkhiH-XEU2mb3lB7q4E",
